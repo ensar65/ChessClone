@@ -4,9 +4,12 @@ import notions from "./notions";
 let pieces = notions.map(notion => {
     if (notion.number === 2 || notion.number === 7) {
         notion["piece"] = "Pawn";
+        notion["natural"] = true;
+
     }
     else if ((notion.letter === "a" || notion.letter === "h") && (notion.number === 1 || notion.number === 8)) {
         notion["piece"] = "Rook";
+        notion["natural"] = true;
     }
     else if ((notion.letter === "b" || notion.letter === "g") && (notion.number === 1 || notion.number === 8)) {
         notion["piece"] = "Knight";
@@ -19,6 +22,7 @@ let pieces = notions.map(notion => {
     }
     else if (notion.letter === "e" && (notion.number === 1 || notion.number === 8)) {
         notion["piece"] = "Check";
+        notion["natural"] = true;
     }
     else notion["piece"] = " "
     return notion
