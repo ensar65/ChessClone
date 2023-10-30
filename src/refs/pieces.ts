@@ -24,7 +24,7 @@ let pieces = notions.map(notion => {
         notion["piece"] = "Check";
         notion["natural"] = true;
     }
-    else notion["piece"] = " "
+    else notion["piece"] = "Blank"
     return notion
 });
 
