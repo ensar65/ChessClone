@@ -7,7 +7,7 @@ class ChessBoard {
     }
 
     simulateBoard() {
-        return this.pieces.join("")
+        return this.pieces.join(" ")
     }
 
 
