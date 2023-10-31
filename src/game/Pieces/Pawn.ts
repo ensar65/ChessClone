@@ -1,5 +1,4 @@
-import Board from "../Board";
-import ChessBoard from "../Board";
+import settings from "../../config/game_settings.json"
 
 class Pawn {
     private notion: Notion;
@@ -9,18 +8,21 @@ class Pawn {
     }
 
 
-    illegalPawnMoveCheck(move: Notion, board: ChessBoard) {
-        let pieces = board.pieces;
-
-        let old_index = pieces.findIndex(piece => piece.letter + piece.number === this.notion.letter + this.notion.number)
-        let new_index = pieces.findIndex(piece => piece.letter + piece.number === move.letter + move.number)
-
-        let old_ = pieces[old_index];
-        let new_ = pieces[new_index];
+    illegalPawnMoveCheck(move: Notion) {
         if (this.notion.piece !== "Pawn") return false;
+
         if (move.piece !== "Blank") { //Trying to eat some pieces.
+            let alphabetical_notions = settings.abscissas;
 
+            let old_notion_a = this.notion.letter;
+            let old_notion_index = alphabetical_notions.indexOf(old_notion_a);
 
+            let new_notion_a = move.letter;
+            let new_notion_index = alphabetical_notions.indexOf(new_notion_a);
+
+            let possible_eating_positions = [old_notion_index + 1, old_notion_index - 1];
+
+            return possible_eating_positions.includes(new_notion_index);
         } else {
             if (this.notion.letter !== move.letter) return false;
             let possible_upgrade = 1; //If piece is natural can upgrade 2 square.
