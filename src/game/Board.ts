@@ -1,3 +1,4 @@
+import Pawn from "./Pieces/Pawn";
 
 class ChessBoard {
     public pieces: Notion[];
@@ -25,7 +26,7 @@ class ChessBoard {
 
         let old_ = this.pieces[old_index];
         let new_ = this.pieces[new_index]
-        if(!illegalMoveAnalyzer(old_,new_)) return console.log("Illegal move.")
+        if (!illegalMoveAnalyzer(old_, new_, this)) return console.log("Illegal move.")
 
         new_.piece = old_.piece;
         old_.piece = "Blank";
@@ -36,23 +37,11 @@ class ChessBoard {
 
 }
 
-function illegalMoveAnalyzer(old_pos: Notion, new_pos: Notion) {
+function illegalMoveAnalyzer(old_pos: Notion, new_pos: Notion, board: ChessBoard) {
 
-    if(old_pos.piece === "Pawn") {
-        if(new_pos.piece !== "Blank") { //Trying to eat some pieces.
-
-
-        } else {
-            if(old_pos.letter !== new_pos.letter) return false;
-            let possible_upgrade = 1; //If piece is natural can upgrade 2 square.
-            console.log(old_pos)
-            if(old_pos.natural) possible_upgrade += 1;
-            console.log(possible_upgrade)
-
-            if(new_pos.number > old_pos.number + possible_upgrade) return false; //Illegal upgrade.
-            console.log(old_pos.number,possible_upgrade)
-            return true;
-        }
+    if (old_pos.piece === "Pawn") {
+        let pawn = new Pawn(old_pos);
+        return pawn.illegalPawnMoveCheck(new_pos, board)
     }
 }
 
