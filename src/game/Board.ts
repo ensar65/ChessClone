@@ -1,4 +1,3 @@
-import Pawn from "./Pieces/Pawn";
 
 class ChessBoard {
     public pieces: Notion[];
@@ -26,7 +25,9 @@ class ChessBoard {
 
         let old_ = this.pieces[old_index];
         let new_ = this.pieces[new_index]
-        if (!illegalMoveAnalyzer(old_, new_, this)) return console.log("Illegal move.")
+
+
+
 
         new_.piece = old_.piece;
         old_.piece = "Blank";
@@ -37,13 +38,6 @@ class ChessBoard {
 
 }
 
-function illegalMoveAnalyzer(old_pos: Notion, new_pos: Notion, board: ChessBoard) {
-
-    if (old_pos.piece === "Pawn") {
-        let pawn = new Pawn(old_pos);
-        return pawn.illegalPawnMoveCheck(new_pos, board)
-    }
-}
 
 
 export default ChessBoard
