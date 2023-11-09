@@ -1,3 +1,3 @@
 interface Notion {
-    letter: string; number: number; piece? : string; natural? : boolean;
+    letter: string; number: number; deployment? : string; natural? : boolean;
 }
