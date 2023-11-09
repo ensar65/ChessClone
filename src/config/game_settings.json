@@ -1,38 +1,13 @@
 {
-  "abscissas" : ["a", "b", "c", "d", "e", "f", "g", "h"],
-  "ordinate_limit" : 8,
-  "pieces" : [
-    {
-      "name" : "Pawn",
-      "paths" : [[0,1]],
-      "eat_paths" : [[1,1]],
-      "natural_boost" : 1,
-      "blockable" : true
-    },
-    {
-      "name" : "Knight",
-      "paths" : [[2,1],[1,2]],
-      "blockable" : false
-    },
-    {
-      "name" : "Bishop",
-      "paths" : [["i","x1"]],
-      "blockable" : true
-    },
-    {
-      "name" : "Rook",
-      "paths" : [[0,"i"]],
-      "blockable" : true
-    },
-    {
-      "name": "Queen",
-      "paths": [["i","i"],["i","x1"],["x1","i"]],
-      "blockable" : true
-    },
-    {
-      "name" : "Check",
-      "paths" : [[1,1]],
-      "blockable" : true
-    }
-  ]
+  "abscissas": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h"
+  ],
+  "ordinate_limit": 8
 }
