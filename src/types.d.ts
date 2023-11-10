@@ -1,3 +1,5 @@
-interface Notion {
-    letter: string; number: number; deployment? : string; natural? : boolean;
+import Piece from "./game/Piece";
+
+interface NotionType {
+    letter: string; number: number; deployment? : Piece; natural? : boolean;
 }
