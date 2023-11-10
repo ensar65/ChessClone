@@ -1,3 +1,3 @@
-import notions from "./refs/notions";
+import deployer from "./refs/deployer";
 
-console.log(notions)
+console.log(deployer())
