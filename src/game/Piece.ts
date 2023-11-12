@@ -7,6 +7,10 @@ export default class Piece {
         this.data = settings.pieces.find(piece => piece.name == piece_name);
     }
 
+    illegalMoveAnalyzer() : boolean {
+        return true;
+    }
+
     get name() {
         return this.data.name;
     }

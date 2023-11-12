@@ -6,8 +6,6 @@ let notions = deployer();
 
 
 export default function () {
-    let abscissas = settings.abscissas.length
-    let ordinate = settings.ordinate_limit;
 
 
     let pieces = Notion.sortByBoard(notions);

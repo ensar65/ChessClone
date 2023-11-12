@@ -1,6 +1,5 @@
 import {NotionType} from "../types";
 import Piece from "./Piece";
-import Notions from "../refs/notions";
 
 export default class Notion {
     readonly notion: NotionType;
