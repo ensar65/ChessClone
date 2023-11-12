@@ -66,6 +66,20 @@
         "backward" : 1,
         "cross" : 1
       }
+    },
+
+    {
+      "name" : "rook",
+      "deployment" : ["A1","A8","H1","H8"],
+      "movement" : {
+        "blockable" : true,
+        "natural_boost" : false,
+        "moveSameTime" : false,
+        "forward" : 99,
+        "backward" : 99,
+        "cross" : 0
+
+      }
     }
   ]
 }
