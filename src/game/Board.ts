@@ -14,7 +14,7 @@ export default class Board {
 
         if (!oldP.piece) return;
 
-        if(oldP.piece.illegalMoveAnalyzer())
+        if(oldP.piece.illegalMoveAnalyzer(oldP, newP, this.notions))
 
 
         this.move_piece(oldP, newP);

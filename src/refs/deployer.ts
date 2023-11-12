@@ -1,5 +1,5 @@
 import notions from "./notions";
-import settings from "../config/game_settings.json"
+import settings from "../config/game_settings"
 import Piece from "../game/Piece";
 import NotionC from "../game/Notion";
 import Notions from "./notions";

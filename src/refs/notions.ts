@@ -1,4 +1,4 @@
-import config from "../config/game_settings.json"
+import config from "../config/game_settings"
 import {NotionType} from "../types";
 import Notion from "../game/Notion";
 

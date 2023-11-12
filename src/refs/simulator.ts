@@ -1,5 +1,5 @@
 import deployer from "./deployer";
-import settings from "../config/game_settings.json"
+import settings from "../config/game_settings"
 import Notion from "../game/Notion";
 
 let notions = deployer();
