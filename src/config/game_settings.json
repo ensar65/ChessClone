@@ -18,7 +18,53 @@
         "blockable" : true,
         "natural_boost" : 1,
         "forward" : 1,
-        "backward" : 0
+        "backward" : 0,
+        "moveSameTime" :  false
+      }
+    },
+    {
+      "name" : "knight",
+      "deployment" : ["B1","B8","G1","G8"],
+      "movement" : {
+        "blockable" : false,
+        "natural_boost" : false,
+        "moveSameTime" : [[2,1], [1,2]]
+      }
+    },
+    {
+      "name" : "bishop",
+      "deployment" : ["C1","C8","F1","F8"],
+      "movement" : {
+        "blockable" : true,
+        "natural_boost" : false,
+        "moveSameTime" : false,
+        "forward" : 99,
+        "backward" : 0,
+        "cross" : 8
+      }
+    },
+    {
+      "name" : "queen",
+      "deployment" : ["D1","D8"],
+      "movement" : {
+        "blockable" : true,
+        "natural_boost" : false,
+        "moveSameTime" : false,
+        "forward" : 99,
+        "backward" : 99,
+        "cross" : 99
+      }
+    },
+    {
+      "name" : "check",
+      "deployment" : ["E1","E8"],
+      "movement" : {
+        "blockable" : true,
+        "natural_boost" : false,
+        "moveSameTime" : false,
+        "forward" : 1,
+        "backward" : 1,
+        "cross" : 1
       }
     }
   ]
