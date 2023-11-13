@@ -31,7 +31,7 @@ export default class Notion {
 
 
     static sortByBoard(notions: Map<string, Notion>) {
-        return Array.from(notions, ([name, value]) => ({name, value})).reverse().sort((a, b) => {
+        return Array.from(notions, ([name, value]) => ({name, value})).sort((a, b) => {
             return a.value.notion.letter.localeCompare(b.value.notion.letter)
         }).sort((a, b): any => {
             let a_point = a.value.notion.number
