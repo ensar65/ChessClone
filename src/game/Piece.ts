@@ -10,6 +10,12 @@ export default class Piece {
     }
 
     illegalMoveAnalyzer(oldP: Notion, newP: Notion, notions: Map<string, Notion>) : boolean {
+        let forward = this.data.movement.forward;
+        let backward = this.data.movement.backward;
+        let cross = this.data.movement.cross;
+        let sideways = this.data.movement.sideways;
+
+
         if(newP.piece) { //Eating attempt.
             if(this.data.movement.eatingScheme) {
 
@@ -17,7 +23,11 @@ export default class Piece {
 
             }
         } else { //Piece moving
+            if(this.data.movement.moveSameTime) { //If piece goes to different dimensions at the same time like knight.
 
+            } else {
+
+            }
         }
         return true;
     }

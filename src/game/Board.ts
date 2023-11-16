@@ -13,6 +13,16 @@ export default class Board {
         let oldP = this.notions.get(n1) as Notion;
         let newP = this.notions.get(n2) as Notion;
 
+        let abscissas = game_settings.abscissas;
+        let ordinates = game_settings.ordinate_limit;
+
+        let n1_ = n1.split("");
+        let n2_ = n2.split("");
+
+        if(!(abscissas.includes(n1_[0].toLowerCase())) || !(abscissas.includes(n2_[0].toLowerCase())) || Number(n1_[1]) === 0 || Number(n2_[1]) === 0 ||  ordinates  < Number(n1_[1]) || ordinates < Number(n2_[1]) )
+            return console.log("Out of range!")
+
+
         if (!oldP.piece) return;
 
         if (oldP.piece.illegalMoveAnalyzer(oldP, newP, this.notions))
