@@ -1,5 +1,14 @@
-import simulator from "./refs/simulator";
+import deployer from "./refs/deployer";
+
+import Board from "./game/Board";
 
 
+let notions = deployer();
 
-console.log(simulator())
+let board = new Board(notions);
+
+
+board.move("E2","E3")
+
+
+console.log(board.simulateBoard())

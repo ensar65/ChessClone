@@ -16,7 +16,10 @@ export default class Notion {
     setPiece(piece: Piece) {
         this.notion.deployment = piece;
     }
-
+    removePiece() : boolean {
+        this.notion.deployment  = undefined;
+        return true;
+    }
     get natural(): boolean {
         return <boolean>this.notion.natural
     }
