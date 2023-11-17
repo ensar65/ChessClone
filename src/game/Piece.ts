@@ -29,19 +29,19 @@ export default class Piece {
 
         let isBackward = ordinate_change > 0;
 
-        let movement_type = "";
+        let move_data = {
+            cross : 0,
+            forward : 0,
+            sideways : 0
+        }
 
-        if(probably_forward === probably_sideways) movement_type = "cross";
-        else if(probably_forward) movement_type = "forward";
-        else if(probably_sideways) movement_type = "sideways"
+        if(probably_forward === probably_sideways) move_data.cross = probably_sideways
+        else if(probably_forward) move_data.forward = probably_forward
+        else if(probably_sideways) move_data.sideways = probably_sideways
 
-        console.log(movement_type)
+        console.log(move_data)
 
-        if(!this.data.movement.backward && isBackward) return false;
-
-        console.log(isBackward)
-
-        console.log(probably_forward,probably_sideways)
+        if(!backward && isBackward) return false;
 
         if (newP.piece) { //Eating attempt.
             if (this.data.movement.eatingScheme) {
@@ -53,7 +53,9 @@ export default class Piece {
             if (this.data.movement.moveSameTime) { //If piece goes to different dimensions at the same time like knight.
 
             } else {
-
+                let natural_boost = this.data.movement.natural_boost;
+                console.log(forward)
+                if (move_data.cross > cross || move_data.sideways > sideways || move_data.forward > forward) return false;
             }
         }
         return true;
