@@ -29,6 +29,14 @@ export default class Piece {
 
         let isBackward = ordinate_change > 0;
 
+        let movement_type = "";
+
+        if(probably_forward === probably_sideways) movement_type = "cross";
+        else if(probably_forward) movement_type = "forward";
+        else if(probably_sideways) movement_type = "sideways"
+
+        console.log(movement_type)
+
         if(!this.data.movement.backward && isBackward) return false;
 
         console.log(isBackward)
