@@ -54,6 +54,12 @@ export default class Piece {
 
             } else {
                 let natural_boost = this.data.movement.natural_boost;
+                if(natural_boost) {
+                    let boost_count = natural_boost as number;
+                    if(oldP.notion.natural) {
+                        forward += boost_count;
+                    }
+                }
                 console.log(forward)
                 if (move_data.cross > cross || move_data.sideways > sideways || move_data.forward > forward) return false;
             }

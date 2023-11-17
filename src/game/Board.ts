@@ -19,7 +19,7 @@ export default class Board {
         let n1_ = n1.split("");
         let n2_ = n2.split("");
 
-        if(!(abscissas.includes(n1_[0].toLowerCase())) || !(abscissas.includes(n2_[0].toLowerCase())) || Number(n1_[1]) === 0 || Number(n2_[1]) === 0 ||  ordinates  < Number(n1_[1]) || ordinates < Number(n2_[1]) )
+        if (!(abscissas.includes(n1_[0].toLowerCase())) || !(abscissas.includes(n2_[0].toLowerCase())) || Number(n1_[1]) === 0 || Number(n2_[1]) === 0 || ordinates < Number(n1_[1]) || ordinates < Number(n2_[1]))
             return console.log("Out of range!")
 
 
@@ -36,8 +36,8 @@ export default class Board {
         let first_piece_letter = pieces[0].value.notion.letter;
 
 
-        let simulatedPieces =  pieces.map((data,index) => {
-                let symbol = data.value.piece ? data.value.piece.symbol : " " ;
+        let simulatedPieces = pieces.map((data, index) => {
+                let symbol = data.value.piece ? data.value.piece.symbol : " ";
                 let notion = data.value.notion;
                 let prefix = "";
                 let footer = "";
@@ -45,23 +45,27 @@ export default class Board {
                 let isLineBreak = Number.isInteger((index + 1) / game_settings.ordinate_limit);
 
 
-                if(first_piece_letter === data.value.notion.letter) prefix = data.value.notion.number + "  ";
-                if(isLineBreak) footer = "\n";
+                if (first_piece_letter === data.value.notion.letter) prefix = data.value.notion.number + "  ";
+                if (isLineBreak) footer = "\n";
 
                 return prefix + symbol + footer;
             })
 
         ;
 
-        return simulatedPieces.concat(game_settings.abscissas.map((a,index) => index === 0 ? "\n   " +  a.toUpperCase() : a.toUpperCase())).join("")
+        return simulatedPieces.concat(game_settings.abscissas.map((a, index) => index === 0 ? "\n   " + a.toUpperCase() : a.toUpperCase())).join("")
     }
 
 
     private move_piece(oldP: Notion, newP: Notion): boolean {
         newP.setPiece(oldP.piece);
         oldP.removePiece();
+
         this.notions.set(newP.str_notion, newP);
         this.notions.set(oldP.str_notion, oldP)
+
+        newP.setNatural(false);
+        oldP.setNatural(false)
         return true;
     }
 }
