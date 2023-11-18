@@ -20,10 +20,10 @@ export default class Board {
         let n2_ = n2.split("");
 
         if (!(abscissas.includes(n1_[0].toLowerCase())) || !(abscissas.includes(n2_[0].toLowerCase())) || Number(n1_[1]) === 0 || Number(n2_[1]) === 0 || ordinates < Number(n1_[1]) || ordinates < Number(n2_[1]))
-            return console.log("Out of range!")
+            return console.log("illegalMove!")
 
 
-        if (!oldP.piece) return;
+        if (!oldP.piece) return console.log("illegalMove!");
 
         if (oldP.piece.illegalMoveAnalyzer(oldP, newP, this.notions))
 

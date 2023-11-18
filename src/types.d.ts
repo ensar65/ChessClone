@@ -14,7 +14,11 @@ interface PieceConfig {
         forward : number,
         sideways : number,
         cross : number,
-        moveSameTime : number[][] | boolean,
+        moveSameTime : {
+            "cross" : number,
+            "forward" : number,
+            "sideways" : number
+        }[] | boolean,
         eatingScheme? : {
             "cross" : number,
             "forward" : number,

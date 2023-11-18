@@ -36,13 +36,12 @@ export default class Piece {
         }
 
         if(probably_forward === probably_sideways) move_data.cross = probably_sideways
-        else if(probably_forward) move_data.forward = probably_forward
-        else if(probably_sideways) move_data.sideways = probably_sideways
+        if(probably_forward) move_data.forward = probably_forward
+        if(probably_sideways) move_data.sideways = probably_sideways
 
-        console.log(move_data)
 
         if(!backward && isBackward) return false;
-
+        console.log(oldP.piece,newP.piece)
         if (newP.piece) { //Eating attempt.
             if (this.data.movement.eatingScheme) {
 
@@ -51,7 +50,12 @@ export default class Piece {
             }
         } else { //Piece moving
             if (this.data.movement.moveSameTime) { //If piece goes to different dimensions at the same time like knight.
-
+                let possible_moves = this.data.movement.moveSameTime;
+                if (typeof possible_moves !== "boolean") {
+                    let possible_move = possible_moves.filter(move => move.cross === move_data.cross && move.forward === move_data.forward && move.sideways === move_data.sideways);
+                    if(possible_move.length <= 0) return false;
+                    return true
+                }
             } else {
                 let natural_boost = this.data.movement.natural_boost;
                 if(natural_boost) {
@@ -60,7 +64,6 @@ export default class Piece {
                         forward += boost_count;
                     }
                 }
-                console.log(forward)
                 if (move_data.cross > cross || move_data.sideways > sideways || move_data.forward > forward) return false;
             }
         }

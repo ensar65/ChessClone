@@ -26,8 +26,19 @@ let pieces : PieceConfig[] =  [
     "movement" : {
       "blockable" : false,
       "natural_boost" : false,
-      "moveSameTime" : [[2,1], [1,2]],
-      "backward" : false,
+      "moveSameTime" : [
+        {
+          "cross" : 0,
+          "forward" : 2,
+          "sideways" : 1
+        },
+        {
+          "cross" : 0,
+          "forward" : 1,
+          "sideways" : 2
+        }
+      ],
+      "backward" : true,
       "forward" : 0,
       "sideways" : 0,
       "cross": 0,
@@ -100,7 +111,7 @@ export default {
     "e",
     "f",
     "g",
-    "h"
+    "h",
   ],
   "ordinate_limit": 8,
   pieces

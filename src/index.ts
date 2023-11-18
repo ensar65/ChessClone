@@ -18,7 +18,9 @@ recursiveBoard(board);
 function recursiveBoard(b : Board) {
     console.log(b.simulateBoard());
     rl.question("Whats your move ? (E2 to E3) :", answer => {
+
        let answers = answer.split("to").map(a => a.trim());
+       if(answers.length < 2 ) return recursiveBoard(b);
        let n1 = answers[0];
        let n2 = answers[1];
        b.move(n1,n2);
