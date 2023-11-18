@@ -53,8 +53,8 @@ export default class Piece {
                 let possible_moves = this.data.movement.moveSameTime;
                 if (typeof possible_moves !== "boolean") {
                     let possible_move = possible_moves.filter(move => move.xy === move_data.xy && move.x === move_data.x && move.y === move_data.y);
-                    if (possible_move.length <= 0) return false;
-                    return true
+                    return possible_move.length > 0;
+
                 }
             } else {
                 let natural_boost = this.data.movement.natural_boost;

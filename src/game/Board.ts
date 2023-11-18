@@ -38,7 +38,6 @@ export default class Board {
 
         let simulatedPieces = pieces.map((data, index) => {
                 let symbol = data.value.piece ? data.value.piece.symbol : " ";
-                let notion = data.value.notion;
                 let prefix = "";
                 let footer = "";
 
