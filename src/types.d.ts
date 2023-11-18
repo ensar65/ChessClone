@@ -9,20 +9,24 @@ interface PieceConfig {
     deployment : string[],
     movement : {
         blockable : boolean,
-        natural_boost : number | boolean,
+        natural_boost : {
+            "xy" : number,
+            "x" : number,
+            "y" : number
+        } | boolean,
         backward : boolean,
-        forward : number,
-        sideways : number,
-        cross : number,
+        x : number,
+        y : number,
+        xy : number,
         moveSameTime : {
-            "cross" : number,
-            "forward" : number,
-            "sideways" : number
+            "xy" : number,
+            "x" : number,
+            "y" : number
         }[] | boolean,
         eatingScheme? : {
-            "cross" : number,
-            "forward" : number,
-            "sideways" : number
+            "xy" : number,
+            "x" : number,
+            "y" : number
         } | boolean
     }
 }

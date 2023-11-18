@@ -11,10 +11,10 @@ export default class Piece {
     }
 
     illegalMoveAnalyzer(oldP: Notion, newP: Notion, notions: Map<string, Notion>): boolean {
-        let forward = this.data.movement.forward;
+        let x = this.data.movement.x;
         let backward = this.data.movement.backward;
-        let cross = this.data.movement.cross;
-        let sideways = this.data.movement.sideways;
+        let xy = this.data.movement.xy;
+        let y = this.data.movement.y;
 
         let old_ = {letter: oldP.notion.letter, number: oldP.notion.number};
         let new_ = {letter: newP.notion.letter, number: newP.notion.number};
@@ -24,24 +24,24 @@ export default class Piece {
 
         let ordinate_change = old_.number - new_.number;
 
-        let probably_sideways = Math.abs(old_a_index - new_a_index);
-        let probably_forward = Math.abs(ordinate_change);
+        let probably_y = Math.abs(old_a_index - new_a_index);
+        let probably_x = Math.abs(ordinate_change);
 
         let isBackward = ordinate_change > 0;
 
         let move_data = {
-            cross : 0,
-            forward : 0,
-            sideways : 0
+            xy: 0,
+            x: 0,
+            y: 0
         }
 
-        if(probably_forward === probably_sideways) move_data.cross = probably_sideways
-        if(probably_forward) move_data.forward = probably_forward
-        if(probably_sideways) move_data.sideways = probably_sideways
+        if (probably_x === probably_y) move_data.xy = probably_y
+        if (probably_x) move_data.x = probably_x
+        if (probably_y) move_data.y = probably_y
 
 
-        if(!backward && isBackward) return false;
-        console.log(oldP.piece,newP.piece)
+        if (!backward && isBackward) return false;
+        console.log(oldP.piece, newP.piece)
         if (newP.piece) { //Eating attempt.
             if (this.data.movement.eatingScheme) {
 
@@ -52,19 +52,21 @@ export default class Piece {
             if (this.data.movement.moveSameTime) { //If piece goes to different dimensions at the same time like knight.
                 let possible_moves = this.data.movement.moveSameTime;
                 if (typeof possible_moves !== "boolean") {
-                    let possible_move = possible_moves.filter(move => move.cross === move_data.cross && move.forward === move_data.forward && move.sideways === move_data.sideways);
-                    if(possible_move.length <= 0) return false;
+                    let possible_move = possible_moves.filter(move => move.xy === move_data.xy && move.x === move_data.x && move.y === move_data.y);
+                    if (possible_move.length <= 0) return false;
                     return true
                 }
             } else {
                 let natural_boost = this.data.movement.natural_boost;
-                if(natural_boost) {
-                    let boost_count = natural_boost as number;
-                    if(oldP.notion.natural) {
-                        forward += boost_count;
+                if (typeof natural_boost != "boolean") {
+
+                    if (oldP.notion.natural) {
+                        x += natural_boost.x;
+                        y += natural_boost.y;
+                        xy += natural_boost.xy;
                     }
                 }
-                if (move_data.cross > cross || move_data.sideways > sideways || move_data.forward > forward) return false;
+                if (move_data.xy > xy || move_data.y > y || move_data.x > x) return false;
             }
         }
         return true;

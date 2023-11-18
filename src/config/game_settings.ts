@@ -7,16 +7,20 @@ let pieces : PieceConfig[] =  [
     "deployment" : ["A2","B2","C2","D2","E2","F2","G2","H2","A7","B7","C7","D7","E7","F7","G7","H7"],
     "movement" : {
       "blockable" : true,
-      "natural_boost" : 1,
+      "natural_boost" :  {
+        "xy" : 0,
+        "x" : 1,
+        "y" : 0
+      },
       "backward" : false,
-      "forward" : 1,
-      "sideways" : 0,
-      "cross": 0,
+      "x" : 1,
+      "y" : 0,
+      "xy": 0,
       "moveSameTime" :  false,
       "eatingScheme" : {
-        "cross" : 1,
-        "forward" : 0,
-        "sideways" : 0
+        "xy" : 1,
+        "x" : 0,
+        "y" : 0
       }
     }
   },
@@ -28,20 +32,20 @@ let pieces : PieceConfig[] =  [
       "natural_boost" : false,
       "moveSameTime" : [
         {
-          "cross" : 0,
-          "forward" : 2,
-          "sideways" : 1
+          "xy" : 0,
+          "x" : 2,
+          "y" : 1
         },
         {
-          "cross" : 0,
-          "forward" : 1,
-          "sideways" : 2
+          "xy" : 0,
+          "x" : 1,
+          "y" : 2
         }
       ],
-      "backward" : true,
-      "forward" : 0,
-      "sideways" : 0,
-      "cross": 0,
+      "backward" : false,
+      "x" : 0,
+      "y" : 0,
+      "xy": 0,
     }
   },
   {
@@ -51,10 +55,10 @@ let pieces : PieceConfig[] =  [
       "blockable" : true,
       "natural_boost" : false,
       "moveSameTime" : false,
-      "forward" : 0,
       "backward" : true,
-      "sideways" : 0,
-      "cross" : 8
+      "x" : 0,
+      "y" : 0,
+      "xy" : 8
     }
   },
   {
@@ -65,9 +69,9 @@ let pieces : PieceConfig[] =  [
       "natural_boost" : false,
       "moveSameTime" : false,
       "backward" : true,
-      "forward" : 99,
-      "sideways" : 99,
-      "cross" : 99
+      "x" : 99,
+      "y" : 99,
+      "xy" : 99
     }
   },
   {
@@ -78,9 +82,9 @@ let pieces : PieceConfig[] =  [
       "natural_boost" : false,
       "moveSameTime" : false,
       "backward" : true,
-      "forward" : 1,
-      "sideways" : 1,
-      "cross" : 1
+      "x" : 1,
+      "y" : 1,
+      "xy" : 1
     }
   },
 
@@ -92,9 +96,9 @@ let pieces : PieceConfig[] =  [
       "natural_boost" : false,
       "moveSameTime" : false,
       "backward" : true,
-      "forward" : 99,
-      "sideways" : 99,
-      "cross" : 0
+      "x" : 99,
+      "y" : 99,
+      "xy" : 0
 
     }
   }
