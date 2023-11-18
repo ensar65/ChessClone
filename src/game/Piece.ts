@@ -5,9 +5,11 @@ import game_settings from "../config/game_settings";
 
 export default class Piece {
     private data: PieceConfig;
+    public natural: boolean;
 
     constructor(piece_name: string) {
         this.data = settings.pieces.find(piece => piece.name == piece_name) as PieceConfig;
+        this.natural = true;
     }
 
     illegalMoveAnalyzer(oldP: Notion, newP: Notion, notions: Map<string, Notion>): boolean {
@@ -60,7 +62,7 @@ export default class Piece {
                 let natural_boost = this.data.movement.natural_boost;
                 if (typeof natural_boost != "boolean") {
 
-                    if (oldP.notion.natural) {
+                    if (this.natural) {
                         x += natural_boost.x;
                         y += natural_boost.y;
                         xy += natural_boost.xy;
@@ -69,6 +71,13 @@ export default class Piece {
                 if (move_data.xy > xy || move_data.y > y || move_data.x > x) return false;
             }
         }
+        return true;
+    }
+
+
+
+    setNatural(type: boolean) {
+        this.natural = type;
         return true;
     }
 

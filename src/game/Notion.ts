@@ -20,13 +20,7 @@ export default class Notion {
         this.notion.deployment  = undefined;
         return true;
     }
-    get natural(): boolean {
-        return <boolean>this.notion.natural
-    }
 
-    setNatural(type: boolean) {
-        this.notion.natural = type;
-    }
 
     get str_notion(): string {
         return this.notion.letter.toUpperCase() + this.notion.number

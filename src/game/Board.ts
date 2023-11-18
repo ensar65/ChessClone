@@ -57,14 +57,14 @@ export default class Board {
 
 
     private move_piece(oldP: Notion, newP: Notion): boolean {
+        oldP.piece.setNatural(false);
+
         newP.setPiece(oldP.piece);
         oldP.removePiece();
 
         this.notions.set(newP.str_notion, newP);
         this.notions.set(oldP.str_notion, oldP)
 
-        newP.setNatural(false);
-        oldP.setNatural(false)
         return true;
     }
 }

@@ -10,7 +10,7 @@ let possible_notions: NotionType[] = [];
 let notions: Map<string, Notion> = new Map();
 abscissas.forEach(abscissa => {
     for (let i = 0; i < ordinate_limit; i++) {
-        possible_notions.push({letter: abscissa, number: (i + 1), natural : false});
+        possible_notions.push({letter: abscissa, number: (i + 1)});
     }
 });
 
