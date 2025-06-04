@@ -7,10 +7,10 @@ import Piece from "../game/Piece";
 export default function () {
    settings.pieces.forEach(piece => {
       notions.forEach(notion => {
-
-         let notion_string = notion.str_notion;
-         if(piece.deployment?.includes(notion_string)) {
-            notion.setPiece(new Piece(piece.name));
+         const notion_string = notion.str_notion;
+         if (piece.deployment?.includes(notion_string)) {
+            const color = notion.notion.number <= 2 ? 'white' : 'black';
+            notion.setPiece(new Piece(piece.name, color));
          }
       });
    });

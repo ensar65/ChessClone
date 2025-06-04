@@ -75,7 +75,7 @@ let pieces : PieceConfig[] =  [
     }
   },
   {
-    "name" : "check",
+    "name" : "king",
     "deployment" : ["E1","E8"],
     "movement" : {
       "blockable" : true,
