@@ -32,27 +32,25 @@ export default class Board {
     }
 
     simulateBoard() {
-        let pieces = Notion.sortByBoard(this.notions);
-        let first_piece_letter = pieces[0].value.notion.letter;
+        const letters = game_settings.abscissas.map(a => a.toUpperCase());
+        const limit = game_settings.ordinate_limit;
 
+        const lines: string[] = [];
 
-        let simulatedPieces = pieces.map((data, index) => {
-                let symbol = data.value.piece ? data.value.piece.symbol : " ";
-                let prefix = "";
-                let footer = "";
+        for (let y = limit; y >= 1; y--) {
+            const rowSymbols: string[] = [];
+            for (const letter of letters) {
+                const notion = this.notions.get(letter + y);
+                const symbol = notion && notion.piece ? notion.piece.symbol : ".";
+                rowSymbols.push(symbol);
+            }
+            lines.push(`${y} | ${rowSymbols.join(" ")} |`);
+        }
 
-                let isLineBreak = Number.isInteger((index + 1) / game_settings.ordinate_limit);
+        lines.push("  +" + "-".repeat(letters.length * 2 - 1) + "+");
+        lines.push("    " + letters.join(" "));
 
-
-                if (first_piece_letter === data.value.notion.letter) prefix = data.value.notion.number + "  ";
-                if (isLineBreak) footer = "\n";
-
-                return prefix + symbol + footer;
-            })
-
-        ;
-
-        return simulatedPieces.concat(game_settings.abscissas.map((a, index) => index === 0 ? "\n   " + a.toUpperCase() : a.toUpperCase())).join("")
+        return lines.join("\n");
     }
 
 
