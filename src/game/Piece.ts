@@ -6,72 +6,68 @@ import game_settings from "../config/game_settings";
 export default class Piece {
     private data: PieceConfig;
     public natural: boolean;
+    public readonly color: 'white' | 'black';
 
-    constructor(piece_name: string) {
+    constructor(piece_name: string, color: 'white' | 'black') {
         this.data = settings.pieces.find(piece => piece.name == piece_name) as PieceConfig;
         this.natural = true;
+        this.color = color;
     }
 
     illegalMoveAnalyzer(oldP: Notion, newP: Notion, notions: Map<string, Notion>): boolean {
-        let x = this.data.movement.x;
-        let backward = this.data.movement.backward;
-        let xy = this.data.movement.xy;
-        let y = this.data.movement.y;
+        const letters = game_settings.abscissas;
+        const oldIndex = letters.indexOf(oldP.notion.letter);
+        const newIndex = letters.indexOf(newP.notion.letter);
 
-        let old_ = {letter: oldP.notion.letter, number: oldP.notion.number};
-        let new_ = {letter: newP.notion.letter, number: newP.notion.number};
+        const dx = newIndex - oldIndex;
+        const dy = newP.notion.number - oldP.notion.number;
 
-        let old_a_index = game_settings.abscissas.indexOf(old_.letter) + 1;
-        let new_a_index = game_settings.abscissas.indexOf(new_.letter) + 1;
+        const absDx = Math.abs(dx);
+        const absDy = Math.abs(dy);
 
-        let ordinate_change = old_.number - new_.number;
-
-        let probably_y = Math.abs(old_a_index - new_a_index);
-        let probably_x = Math.abs(ordinate_change);
-
-        let isBackward = ordinate_change > 0;
-
-        let move_data = {
-            xy: 0,
-            x: 0,
-            y: 0
-        }
-
-        if (probably_x === probably_y) move_data.xy = probably_y
-        if (probably_x) move_data.x = probably_x
-        if (probably_y) move_data.y = probably_y
-
-
-        if (!backward && isBackward) return false;
-        console.log(oldP.piece, newP.piece)
-        if (newP.piece) { //Eating attempt.
-            if (this.data.movement.eatingScheme) {
-
-            } else {
-
+        const pathClear = (): boolean => {
+            const stepX = Math.sign(dx);
+            const stepY = Math.sign(dy);
+            const steps = Math.max(absDx, absDy);
+            for (let i = 1; i < steps; i++) {
+                const letter = letters[oldIndex + stepX * i];
+                const number = oldP.notion.number + stepY * i;
+                const key = letter.toUpperCase() + number;
+                const n = notions.get(key);
+                if (n?.piece) return false;
             }
-        } else { //Piece moving
-            if (this.data.movement.moveSameTime) { //If piece goes to different dimensions at the same time like knight.
-                let possible_moves = this.data.movement.moveSameTime;
-                if (typeof possible_moves !== "boolean") {
-                    let possible_move = possible_moves.filter(move => move.xy === move_data.xy && move.x === move_data.x && move.y === move_data.y);
-                    return possible_move.length > 0;
+            return true;
+        };
 
-                }
-            } else {
-                let natural_boost = this.data.movement.natural_boost;
-                if (typeof natural_boost != "boolean") {
-
-                    if (this.natural) {
-                        x += natural_boost.x;
-                        y += natural_boost.y;
-                        xy += natural_boost.xy;
+        switch (this.data.name) {
+            case 'pawn': {
+                const dir = this.color === 'white' ? 1 : -1;
+                if (dx === 0) {
+                    if (dy === dir && !newP.piece) return true;
+                    if (dy === 2 * dir && this.natural && !newP.piece) {
+                        const betweenKey = oldP.notion.letter.toUpperCase() + (oldP.notion.number + dir);
+                        const between = notions.get(betweenKey);
+                        return !between?.piece;
                     }
                 }
-                if (move_data.xy > xy || move_data.y > y || move_data.x > x) return false;
+                if (absDx === 1 && dy === dir && newP.piece && newP.piece.color !== this.color) return true;
+                return false;
             }
+            case 'rook':
+                if (dx === 0 || dy === 0) return pathClear();
+                return false;
+            case 'bishop':
+                if (absDx === absDy) return pathClear();
+                return false;
+            case 'queen':
+                if (dx === 0 || dy === 0 || absDx === absDy) return pathClear();
+                return false;
+            case 'king':
+                return absDx <= 1 && absDy <= 1;
+            case 'knight':
+                return (absDx === 1 && absDy === 2) || (absDx === 2 && absDy === 1);
         }
-        return true;
+        return false;
     }
 
 
